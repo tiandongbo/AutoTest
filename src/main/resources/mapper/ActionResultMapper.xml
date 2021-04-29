@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huawei.mes.db.dao.ActionResultDao" >
+  <resultMap id="BaseResultMap" type="com.huawei.mes.db.dao.entity.ActionResultDO" >
+    <id column="RESULT_ID" property="resultId" jdbcType="NULL" />
+    <result column="TRACE_ID" property="traceId" jdbcType="NULL" />
+    <result column="CASE_ID" property="caseId" jdbcType="NULL" />
+    <result column="ACTION_NAME" property="actionName" jdbcType="NULL" />
+    <result column="ACTION_URL" property="actionUrl" jdbcType="NULL" />
+    <result column="ACTION_RESULT" property="actionResult" jdbcType="NULL" />
+    <result column="CREATED_DATE" property="createdDate" jdbcType="NULL" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="NULL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    RESULT_ID, TRACE_ID, CASE_ID, ACTION_NAME, ACTION_URL, ACTION_RESULT, CREATED_DATE, 
+    CREATED_BY
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Object" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_TEST_CASE_ACTION_RESULT
+    where RESULT_ID = #{resultId,jdbcType=NULL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Object" >
+    delete from T_TEST_CASE_ACTION_RESULT
+    where RESULT_ID = #{resultId,jdbcType=NULL}
+  </delete>
+  <insert id="insert" parameterType="com.huawei.mes.db.dao.entity.ActionResultDO" >
+    insert into T_TEST_CASE_ACTION_RESULT ( TRACE_ID, CASE_ID,
+      ACTION_NAME, ACTION_URL, ACTION_RESULT, 
+       CREATED_BY)
+    values ( #{traceId,jdbcType=NULL}, #{caseId,jdbcType=NULL},
+      #{actionName,jdbcType=NULL}, #{actionUrl,jdbcType=NULL}, #{actionResult,jdbcType=NULL}, 
+       #{createdBy,jdbcType=NULL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huawei.mes.db.dao.entity.ActionResultDO" >
+    insert into T_TEST_CASE_ACTION_RESULT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="resultId != null" >
+        RESULT_ID,
+      </if>
+      <if test="traceId != null" >
+        TRACE_ID,
+      </if>
+      <if test="caseId != null" >
+        CASE_ID,
+      </if>
+      <if test="actionName != null" >
+        ACTION_NAME,
+      </if>
+      <if test="actionUrl != null" >
+        ACTION_URL,
+      </if>
+      <if test="actionResult != null" >
+        ACTION_RESULT,
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE,
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="resultId != null" >
+        #{resultId,jdbcType=NULL},
+      </if>
+      <if test="traceId != null" >
+        #{traceId,jdbcType=NULL},
+      </if>
+      <if test="caseId != null" >
+        #{caseId,jdbcType=NULL},
+      </if>
+      <if test="actionName != null" >
+        #{actionName,jdbcType=NULL},
+      </if>
+      <if test="actionUrl != null" >
+        #{actionUrl,jdbcType=NULL},
+      </if>
+      <if test="actionResult != null" >
+        #{actionResult,jdbcType=NULL},
+      </if>
+      <if test="createdDate != null" >
+        #{createdDate,jdbcType=NULL},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy,jdbcType=NULL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huawei.mes.db.dao.entity.ActionResultDO" >
+    update T_TEST_CASE_ACTION_RESULT
+    <set >
+      <if test="traceId != null" >
+        TRACE_ID = #{traceId,jdbcType=NULL},
+      </if>
+      <if test="caseId != null" >
+        CASE_ID = #{caseId,jdbcType=NULL},
+      </if>
+      <if test="actionName != null" >
+        ACTION_NAME = #{actionName,jdbcType=NULL},
+      </if>
+      <if test="actionUrl != null" >
+        ACTION_URL = #{actionUrl,jdbcType=NULL},
+      </if>
+      <if test="actionResult != null" >
+        ACTION_RESULT = #{actionResult,jdbcType=NULL},
+      </if>
+      <if test="createdDate != null" >
+        CREATED_DATE = #{createdDate,jdbcType=NULL},
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY = #{createdBy,jdbcType=NULL},
+      </if>
+    </set>
+    where RESULT_ID = #{resultId,jdbcType=NULL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huawei.mes.db.dao.entity.ActionResultDO" >
+    update T_TEST_CASE_ACTION_RESULT
+    set TRACE_ID = #{traceId,jdbcType=NULL},
+      CASE_ID = #{caseId,jdbcType=NULL},
+      ACTION_NAME = #{actionName,jdbcType=NULL},
+      ACTION_URL = #{actionUrl,jdbcType=NULL},
+      ACTION_RESULT = #{actionResult,jdbcType=NULL},
+      CREATED_DATE = #{createdDate,jdbcType=NULL},
+      CREATED_BY = #{createdBy,jdbcType=NULL}
+    where RESULT_ID = #{resultId,jdbcType=NULL}
+  </update>
+</mapper>
