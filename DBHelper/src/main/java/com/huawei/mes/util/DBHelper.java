@@ -1,5 +1,8 @@
 package com.huawei.mes.util;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.io.InputStream;
 import java.sql.*;
 import java.util.Properties;
@@ -11,6 +14,7 @@ import java.util.Properties;
  * Date 2021/4/30 20:59
  */
 public class DBHelper {
+    private final static Log log = LogFactory.getLog(DBHelper.class);
     //定义连接资源
     private static Connection ct = null;
     private static PreparedStatement ps = null;
@@ -40,15 +44,22 @@ public class DBHelper {
             username = pp.getProperty("username");
             password = pp.getProperty("password");
             Class.forName(driver);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            log.error("没有找到驱动程序!", e);
+            System.out.println(" 没有找到驱动程序! 所需的驱动程序为： " + e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
-            //System.exit(0);
-            System.out.println(" 读取数据库连接配置文件jdbc.properties失败!");
+            String msg = "读取数据库连接配置文件jdbc.properties失败! 查找的配置文件路径为：%s";
+            msg = String.format(msg, DBHelper.class.getClassLoader().getResource("").getPath());
+            log.error(msg, e);
+            System.out.println(msg);
         } finally {
             try {
                 is.close();
             } catch (Exception e) {
                 e.printStackTrace();
+                log.error(e);
             }
             is = null;
         }
@@ -61,6 +72,7 @@ public class DBHelper {
             ct = DriverManager.getConnection(url, username, password);
         } catch (Exception e) {
             e.printStackTrace();
+            log.error(e);
         }
         return ct;
     }
@@ -72,6 +84,7 @@ public class DBHelper {
                 rs.close();
             } catch (Exception e) {
                 e.printStackTrace();
+                log.error(e);
             }
             rs = null;
         }
@@ -80,6 +93,7 @@ public class DBHelper {
                 ps.close();
             } catch (Exception e) {
                 e.printStackTrace();
+                log.error(e);
             }
             ps = null;
         }
@@ -88,6 +102,7 @@ public class DBHelper {
                 ct.close();
             } catch (Exception e) {
                 e.printStackTrace();
+                log.error(e);
             }
             ct = null;
         }
@@ -107,6 +122,7 @@ public class DBHelper {
             rs = ps.executeQuery();
         } catch (Exception e) {
             e.printStackTrace();
+            log.error(e);
             throw new RuntimeException(e.getMessage());
         }
         return rs;
@@ -125,6 +141,7 @@ public class DBHelper {
             return ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
+            log.error(e);
             throw new RuntimeException(e.getMessage());
         } finally {
             close(ct, ps, rs);
