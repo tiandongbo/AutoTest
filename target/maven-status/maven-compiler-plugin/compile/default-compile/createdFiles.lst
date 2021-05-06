@@ -1,0 +1,9 @@
+com\huawei\mes\util\db\DruidDataSourceFactory.class
+com\huawei\mes\db\dao\entity\ActionResultDO.class
+com\huawei\mes\db\service\Demo.class
+com\huawei\mes\demo\LogTest.class
+com\huawei\mes\db\dao\ActionResultDao.class
+com\huawei\mes\common\ResultVO.class
+com\huawei\mes\db\service\ActionResultService.class
+com\huawei\mes\db\service\Main.class
+com\huawei\mes\util\db\SqlSessionFactoryUtil.class
